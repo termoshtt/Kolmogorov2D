@@ -10,3 +10,4 @@ add_definitions(-std=c++11 -Wall)
 find_package(CUDA REQUIRED)
 
 add_subdirectory(cujak)
+add_subdirectory(test)
