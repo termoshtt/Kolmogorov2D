@@ -1,0 +1,3 @@
+[submodule "cujak"]
+	path = cujak
+	url = https://termoshtt@github.com/termoshtt/cujak
