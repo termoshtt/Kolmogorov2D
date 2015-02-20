@@ -16,3 +16,8 @@ cuda_add_library(cuKolmogorov2D STATIC
 target_link_libraries(cuKolmogorov2D cujak)
 
 add_subdirectory(test)
+
+add_custom_target(
+    document
+    COMMAND "doxygen" "doc/Doxyfile"
+)
