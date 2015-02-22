@@ -12,7 +12,7 @@ typedef thrust::host_vector<Complex> hcVector;
 
 using namespace Kolmogorov2D;
 
-const int Nx = 128, Ny = 128;
+const int Nx = 128, Ny = 128, Nyc = Ny/2 + 1;
 
 void output_field(Vector& u, std::string filename){
   hVector h(u);
@@ -31,8 +31,8 @@ void output_coef(cVector& uf, std::string filename){
   std::ofstream ofs2(filename.c_str());
   ofs2 << std::scientific << std::setprecision(7);
   for (int i = 0; i < Nx; i++) {
-    for (int j = 0; j < Ny/2 + 1; j++) {
-      Complex c = hf[Ny * i + j];
+    for (int j = 0; j < Nyc; j++) {
+      Complex c = hf[Nyc * i + j];
       ofs2 << i << " " << j << " " << c.x << " " << c.y << "\n";
     }
     ofs2 << std::endl;
@@ -40,7 +40,7 @@ void output_coef(cVector& uf, std::string filename){
 }
 
 int main(int argc, char const *argv[]) {
-  cVector uf(Nx * (Ny/2+1));
+  cVector uf(Nx * Nyc);
   Vector u(Nx * Ny);
   Coefficient<float> C(Nx, Ny, uf);
   Field<float> F(Nx, Ny, u);
