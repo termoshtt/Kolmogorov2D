@@ -34,9 +34,24 @@ private:
 
 /*!
  * @class ConverterR2C
+ * @headerfile Converter.hpp "Converter.hpp"
  *
  * @brief 場から係数を計算する
  */
-class ConverterR2C {};
+template <typename Float> class ConverterR2C {
+public:
+  typedef typename cujak::fft2d::traits<Float>::Real Real;
+  typedef typename cujak::fft2d::traits<Float>::Complex Complex;
+
+  ConverterR2C(int Nx, int Ny);
+  ~ConverterR2C() { cufftDestroy(plan); }
+  void operator()(const Real *u, Complex *uf) const;
+  void operator()(const Field<Float> &u, Coefficient<Float> &uf) const {
+    operator()(u.get(), uf.get());
+  }
+
+private:
+  cufftHandle plan;
+};
 
 } // namespace Kolmogorov2D
