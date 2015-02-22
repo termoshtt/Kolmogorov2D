@@ -36,3 +36,7 @@ gmon.out
 
 *.wxm
 *.html
+
+# for Nsight
+.project
+.cproject
