@@ -26,7 +26,7 @@ public:
   Complex get(int i, int j) const { return u[stride * i + j]; }
   void set(int i, int j, Complex v) { u[stride * i + j] = v; }
 
-  pComplex get() const { return u; }
+  Complex *get() const { return u.get(); }
 
 private:
   const int Nx, Ny, stride, N /** Complexとしてのuの個数 */;
@@ -52,7 +52,7 @@ public:
   Real get(int i, int j) const { return u[Ny * i + j]; }
   void set(int i, int j, Real v) { u[Ny * i + j] = v; }
 
-  pReal get() const { return u; }
+  Real *get() const { return u.get(); }
 
 private:
   const int Nx, Ny;
