@@ -13,9 +13,9 @@ using namespace Kolmogorov2D;
 int main(int argc, char const *argv[]) {
   const int Nx = 128, Ny = 128;
 
-  cVector uf(Nx*Ny);
+  cVector uf(Nx * Ny);
   Coefficient<float> C(Nx, Ny, uf);
-  Complex c = {0.0, 1.0};
+  Complex c = { 0.0, 1.0 };
   C.set(0, 1, c);
 
   Vector u(Nx * Ny);
@@ -27,7 +27,7 @@ int main(int argc, char const *argv[]) {
   hVector h(u);
   for (int i = 0; i < Nx; i++) {
     for (int j = 0; j < Ny; j++) {
-      std::cout << i << " " << j << " " << h[Ny*i+j] << "\n";
+      std::cout << i << " " << j << " " << h[Ny * i + j] << "\n";
     }
     std::cout << std::endl;
   }
