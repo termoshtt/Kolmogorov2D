@@ -1,8 +1,12 @@
 #pragma once
 
 #include "cujak/cufft.hpp"
+
 #include <thrust/device_vector.h>
 #include <thrust/device_ptr.h>
+#include <iostream>
+#include <iomanip>
+#include <fstream>
 
 namespace Kolmogorov2D {
 
@@ -12,7 +16,7 @@ namespace Kolmogorov2D {
  *
  * @brief ポインタをFourier係数の列として解釈する
  */
-template <typename Float = float> class Coefficient {
+template <typename Float> class Coefficient {
 public:
   typedef typename cujak::fft2d::traits<Float>::Complex Complex;
   typedef thrust::device_ptr<Complex> pComplex;
@@ -28,6 +32,23 @@ public:
 
   Complex *get() const { return u.get(); }
 
+  void output_ascii(std::string filename) const {
+    std::ofstream ofs(filename.c_str());
+    ofs << std::scientific << std::setprecision(7);
+    output_ascii(ofs);
+  }
+
+  void output_ascii(std::ostream &ost) const {
+    for (int i = 0; i < Nx; i++) {
+      for (int j = 0; j < stride; j++) {
+        Complex c = u[stride * i + j];
+        ost << i << " " << j << " " << c.x << " " << c.y << "\n";
+      }
+      ost << '\n';
+    }
+    ost << std::flush;
+  }
+
 private:
   const int Nx, Ny, stride, N /** Complexとしてのuの個数 */;
   pComplex u;
@@ -39,7 +60,7 @@ private:
  *
  * @brief 実空間の場を保持する
  */
-template <typename Float = float> class Field {
+template <typename Float> class Field {
 public:
   typedef typename cujak::fft2d::traits<Float>::Real Real;
   typedef thrust::device_ptr<Real> pReal;
@@ -53,6 +74,22 @@ public:
   void set(int i, int j, Real v) { u[Ny * i + j] = v; }
 
   Real *get() const { return u.get(); }
+
+  void output_ascii(std::string filename) const {
+    std::ofstream ofs(filename.c_str());
+    ofs << std::scientific << std::setprecision(7);
+    output_ascii(ofs);
+  }
+
+  void output_ascii(std::ostream &ost) const {
+    for (int i = 0; i < Nx; i++) {
+      for (int j = 0; j < Ny; j++) {
+        ost << i << " " << j << " " << u[Ny * i + j] << "\n";
+      }
+      ost << '\n';
+    }
+    ost << std::flush;
+  }
 
 private:
   const int Nx, Ny;
