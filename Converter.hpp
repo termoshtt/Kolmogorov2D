@@ -51,6 +51,7 @@ public:
   }
 
 private:
+  const int Nx, Ny;
   cufftHandle plan;
 };
 
