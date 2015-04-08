@@ -3,8 +3,8 @@
 #include <fstream>
 #include <iomanip>
 
-typedef typename cujak::fft2d::traits<float>::Real Real;
-typedef typename cujak::fft2d::traits<float>::Complex Complex;
+typedef typename cujak::traits<float>::Real Real;
+typedef typename cujak::traits<float>::Complex Complex;
 typedef thrust::device_vector<Real> Vector;
 typedef thrust::device_vector<Complex> cVector;
 typedef thrust::host_vector<Real> hVector;

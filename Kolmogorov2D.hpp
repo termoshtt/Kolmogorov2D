@@ -18,7 +18,7 @@ namespace Kolmogorov2D {
  */
 template <typename Float> class Coefficient {
 public:
-  typedef typename cujak::fft2d::traits<Float>::Complex Complex;
+  typedef typename cujak::traits<Float>::Complex Complex;
   typedef thrust::device_ptr<Complex> pComplex;
 
   Coefficient(int Nx_, int Ny_, pComplex u_)
@@ -62,7 +62,7 @@ private:
  */
 template <typename Float> class Field {
 public:
-  typedef typename cujak::fft2d::traits<Float>::Real Real;
+  typedef typename cujak::traits<Float>::Real Real;
   typedef thrust::device_ptr<Real> pReal;
 
   Field(int Nx_, int Ny_, pReal u_) : Nx(Nx_), Ny(Ny_), u(u_) {}

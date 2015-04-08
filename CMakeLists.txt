@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 2.8)
 project(cuKolmogorov2D)
 include_directories(.)
 add_definitions(-std=c++11 -Wall)
+set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};-std=c++11)
 
 # libraries
 find_package(CUDA REQUIRED)

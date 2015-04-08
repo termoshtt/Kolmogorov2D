@@ -18,8 +18,8 @@ namespace Kolmogorov2D {
  */
 template <typename Float> class ConverterC2R {
 public:
-  typedef typename cujak::fft2d::traits<Float>::Real Real;
-  typedef typename cujak::fft2d::traits<Float>::Complex Complex;
+  typedef typename cujak::traits<Float>::Real Real;
+  typedef typename cujak::traits<Float>::Complex Complex;
 
   ConverterC2R(int Nx, int Ny);
   ~ConverterC2R() { cufftDestroy(plan); }
@@ -40,8 +40,8 @@ private:
  */
 template <typename Float> class ConverterR2C {
 public:
-  typedef typename cujak::fft2d::traits<Float>::Real Real;
-  typedef typename cujak::fft2d::traits<Float>::Complex Complex;
+  typedef typename cujak::traits<Float>::Real Real;
+  typedef typename cujak::traits<Float>::Complex Complex;
 
   ConverterR2C(int Nx, int Ny);
   ~ConverterR2C() { cufftDestroy(plan); }

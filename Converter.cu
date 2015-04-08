@@ -33,7 +33,7 @@ template <typename T> class mult {
   T a;
 
 public:
-  typedef typename cujak::fft2d::traits<T>::Complex Complex;
+  typedef typename cujak::traits<T>::Complex Complex;
 
   mult(T a) : a(a) {}
 
