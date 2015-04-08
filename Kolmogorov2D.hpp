@@ -3,18 +3,12 @@
 #include "cujak/cufft.hpp"
 
 #include <thrust/device_vector.h>
-#include <thrust/device_ptr.h>
-#include <iostream>
-#include <iomanip>
-#include <fstream>
 
 namespace Kolmogorov2D {
 
 /*!
  * @class Coefficient
  * @headerfile Kolmogorov2D.hpp "Kolmogorov2D.hpp"
- *
- * @brief ポインタをFourier係数の列として解釈する
  */
 template <typename Float> class Coefficient {
 public:
@@ -31,22 +25,9 @@ public:
   Complex *get() { return u.data().get(); }
   const Complex *get() const { return u.data().get(); }
 
-  void output_ascii(std::string filename) const {
-    std::ofstream ofs(filename.c_str());
-    ofs << std::scientific << std::setprecision(7);
-    output_ascii(ofs);
-  }
-
-  void output_ascii(std::ostream &ost) const {
-    for (int i = 0; i < Nx; i++) {
-      for (int j = 0; j < stride; j++) {
-        Complex c = u[stride * i + j];
-        ost << i << " " << j << " " << c.x << " " << c.y << "\n";
-      }
-      ost << '\n';
-    }
-    ost << std::flush;
-  }
+  int size_x() const { return Nx; }
+  int size_y() const { return Ny; }
+  int get_stride() const { return stride; }
 
 private:
   const int Nx, Ny, stride, N /** Complexとしてのuの個数 */;
@@ -56,8 +37,6 @@ private:
 /*!
  * @class Field
  * @headerfile Kolmogorov2D.hpp "Kolmogorov2D.hpp"
- *
- * @brief 実空間の場を保持する
  */
 template <typename Float> class Field {
 public:
@@ -73,21 +52,8 @@ public:
   Real *get() { return u.data().get(); }
   const Real *get() const { return u.data().get(); }
 
-  void output_ascii(std::string filename) const {
-    std::ofstream ofs(filename.c_str());
-    ofs << std::scientific << std::setprecision(7);
-    output_ascii(ofs);
-  }
-
-  void output_ascii(std::ostream &ost) const {
-    for (int i = 0; i < Nx; i++) {
-      for (int j = 0; j < Ny; j++) {
-        ost << i << " " << j << " " << u[Ny * i + j] << "\n";
-      }
-      ost << '\n';
-    }
-    ost << std::flush;
-  }
+  int size_x() const { return Nx; }
+  int size_y() const { return Ny; }
 
 private:
   const int Nx, Ny;

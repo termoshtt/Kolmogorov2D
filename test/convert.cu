@@ -1,5 +1,7 @@
 
 #include "../Converter.hpp"
+#include "../output.hpp"
+
 #include <fstream>
 #include <iomanip>
 
@@ -21,11 +23,11 @@ int main(int argc, char const *argv[]) {
   C.set(0, 1, c);
   C.set(1, 0, c);
 
-  C.output_ascii("coef1.dat");
+  output_ascii(C, "coef1.dat");
   c2r(C, F);
-  F.output_ascii("field.dat");
+  output_ascii(F, "field.dat");
   r2c(F, C);
-  C.output_ascii("coef2.dat");
+  output_ascii(C, "coef2.dat");
 
   return 0;
 }
