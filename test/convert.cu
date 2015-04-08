@@ -5,20 +5,14 @@
 
 typedef typename cujak::traits<float>::Real Real;
 typedef typename cujak::traits<float>::Complex Complex;
-typedef thrust::device_vector<Real> Vector;
-typedef thrust::device_vector<Complex> cVector;
-typedef thrust::host_vector<Real> hVector;
-typedef thrust::host_vector<Complex> hcVector;
 
 using namespace Kolmogorov2D;
 
-const int Nx = 128, Ny = 128, Nyc = Ny/2 + 1;
+const int Nx = 128, Ny = 128;
 
 int main(int argc, char const *argv[]) {
-  cVector uf(Nx * Nyc);
-  Vector u(Nx * Ny);
-  Coefficient<float> C(Nx, Ny, uf);
-  Field<float> F(Nx, Ny, u);
+  Coefficient<float> C(Nx, Ny);
+  Field<float> F(Nx, Ny);
 
   ConverterC2R<float> c2r(Nx, Ny);
   ConverterR2C<float> r2c(Nx, Ny);
