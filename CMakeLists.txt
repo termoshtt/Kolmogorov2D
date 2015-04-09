@@ -11,8 +11,15 @@ set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};-std=c++11)
 find_package(CUDA REQUIRED)
 add_subdirectory(cujak)
 
+add_custom_command(
+  OUTPUT Kolmogorov2D.pb.cc Kolmogorov2D.pb.h
+  DEPENDS Kolmogorov2D.proto
+  COMMAND "protoc" "Kolmogorov2D.proto" "--cpp_out=." "--python_out=."
+)
+
 cuda_add_library(cuKolmogorov2D STATIC
   Converter.cu
+  Kolmogorov2D.pb.cc
 )
 target_link_libraries(cuKolmogorov2D cujak)
 

@@ -40,3 +40,8 @@ gmon.out
 # for Nsight
 .project
 .cproject
+
+# protoc
+*.pb.cc
+*.pb.h
+*_pb2.py
