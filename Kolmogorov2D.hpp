@@ -14,6 +14,8 @@ template <typename Float> class Coefficient {
 public:
   typedef typename cujak::traits<Float>::Complex Complex;
   typedef thrust::device_vector<Complex> cVector;
+  typedef thrust::device_ptr<Complex> iterator;
+  typedef Complex value_type;
 
   Coefficient(int Nx_, int Ny_)
       : Nx(Nx_), Ny(Ny_), stride(Ny / 2 + 1), N(Nx * stride), u(N) {}
@@ -29,6 +31,11 @@ public:
   int size_y() const { return Ny; }
   int get_stride() const { return stride; }
 
+  iterator begin() { return u.begin(); }
+  iterator end() { return u.end(); }
+  const iterator begin() const { return u.begin(); }
+  const iterator end() const { return u.end(); }
+
 private:
   const int Nx, Ny, stride, N /** Complexとしてのuの個数 */;
   cVector u;
@@ -42,6 +49,8 @@ template <typename Float> class Field {
 public:
   typedef typename cujak::traits<Float>::Real Real;
   typedef thrust::device_vector<Real> Vector;
+  typedef thrust::device_ptr<Real> iterator;
+  typedef Real value_type;
 
   Field(int Nx_, int Ny_) : Nx(Nx_), Ny(Ny_), u(Nx * Ny) {}
 
@@ -54,6 +63,11 @@ public:
 
   int size_x() const { return Nx; }
   int size_y() const { return Ny; }
+
+  iterator begin() { return u.begin(); }
+  iterator end() { return u.end(); }
+  const iterator begin() const { return u.begin(); }
+  const iterator end() const { return u.end(); }
 
 private:
   const int Nx, Ny;
