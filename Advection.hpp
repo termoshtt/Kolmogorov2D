@@ -2,6 +2,7 @@
 
 #include "Kolmogorov2D.hpp"
 #include "Converter.hpp"
+#include "diff.hpp"
 
 namespace Kolmogorov2D {
 
@@ -17,6 +18,6 @@ public:
 
   void operator()(Coefficient<T> &u);
   void operator()(const Coefficient<T> &, Coefficient<T> &);
-}
+};
 
 } // namespace Kolmogorov2D

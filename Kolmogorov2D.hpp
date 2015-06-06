@@ -24,17 +24,13 @@ public:
   Complex get(int i, int j) const { return u[stride * i + j]; }
   void set(int i, int j, Complex v) { u[stride * i + j] = v; }
 
-  Complex *get() { return u.data().get(); }
-  const Complex *get() const { return u.data().get(); }
+  thrust::device_ptr<Complex> get() { return u.data(); }
+  const thrust::device_ptr<Complex> get() const { return u.data().get(); }
 
   int size_x() const { return Nx; }
   int size_y() const { return Ny; }
+  int size() const { return N; }
   int get_stride() const { return stride; }
-
-  iterator begin() { return u.begin(); }
-  iterator end() { return u.end(); }
-  const iterator begin() const { return u.begin(); }
-  const iterator end() const { return u.end(); }
 
 private:
   const int Nx, Ny, stride, N /** Complexとしてのuの個数 */;
